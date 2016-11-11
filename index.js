@@ -3,7 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
-var favicons = require('connect-favicons');
+var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -12,7 +12,7 @@ var users = {};
 app.use(logger('dev'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(favicons(__dirname, '/public/favicon.ico'));
+app.use(favicon(path.join(__dirname, '/public/images/favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -38,7 +38,6 @@ io.on('connection', function(socket) {
     console.log('a user connected');
 
     socket.on('online', function(data) {
-        console.log(users);
         socket.name = data.user;
         if (!users[data.user]) {
             users[data.user] = socket;
