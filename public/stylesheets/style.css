@@ -1,0 +1,21 @@
+footer {
+    background-color: #d9edf7;
+    position: absolute;
+    width: 100%;
+    clear: both;
+    bottom: 0;
+}
+.from{
+    color: blue;
+}
+.to{
+    color: red;
+}
+.userheader{
+    z-index: 2;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
