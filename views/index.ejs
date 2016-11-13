@@ -8,8 +8,10 @@
     <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
     <title>chat</title>
-    <script src="//cdn.bootcss.com/jquery/1.12.0/jquery.js"></script>
+    <script src="//cdn.bootcss.com/jquery/1.10.2/jquery.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="javascripts/jquery.qqFace.js"></script>
+    <script src="javascripts/jquery.brower.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.2.0/js/modal.js"></script>
     <script src="//cdn.socket.io/socket.io-1.4.4.js"></script>
 </head>
@@ -25,6 +27,7 @@
                     <div class="form-group" >
                         <input id="msg" type="text" class="form-control" style="width:400px" placeholder="say what">
                     </div>
+                    <button type="button" id="emotion" class="btn btn-error">表情</button>
                     <button type="submit" class="btn btn-success">发送</button>
                 </form>
                 <button type="button" class="btn btn-default navbar-btn">

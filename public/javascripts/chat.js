@@ -8,9 +8,9 @@ $(document).ready(function() {
     function renderColor(data) {
         var num = $('#messages').children('div').length;
         if (num % 2 == 0) {
-            return "<div class='panel-body'>" + renderFrom(data.from) + "对" + renderTo(data.to) + data.msg + "</div>";
+            return "<div class='panel-body'>" + renderFrom(data.from) + "对" + renderTo(data.to) + replace_em(data.msg) + "</div>";
         } else {
-            return "<div class='panel-footer'>" + renderFrom(data.from) + "对" + renderTo(data.to) + data.msg + "</div>";
+            return "<div class='panel-footer'>" + renderFrom(data.from) + "对" + renderTo(data.to) + replace_em(data.msg) + "</div>";
         }
     }
 
@@ -63,6 +63,22 @@ $(document).ready(function() {
             login();
         });
 
+    }
+    $('#emotion').qqFace({
+        assign: 'msg', //给输入框赋值
+        path: '/images/face/' //表情图片存放的路径
+    });
+    // $(".sub_btn").click(function() {
+    //     var str = $("#saytext").val();
+    //     $("#messages").append(replace_em(str));
+    // });
+
+    function replace_em(str) {
+        str = str.replace(/\</g, '&lt;');
+        str = str.replace(/\>/g, '&gt;');
+        str = str.replace(/\n/g, '<br/>');
+        str = str.replace(/\[em_([0-9]*)\]/g, '<img src="images/face/$1.gif" border="0" />');
+        return str;
     }
 
     $('form').submit(function() {
