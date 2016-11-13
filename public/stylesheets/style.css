@@ -14,8 +14,20 @@ footer {
 .userheader{
     z-index: 2;
     color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7;
+    background-color: #5cb85c;
+    border-color: #5cb85c;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+}
+.panel-default{
+    height: 450px;
+    overflow: auto;
+}
+#usernick{
+    font-weight: bold;
+    color: #d9534f;
+}
+.time{
+    float: right;
+    color: #2e6da4;
 }

@@ -8,9 +8,9 @@ $(document).ready(function() {
     function renderColor(data) {
         var num = $('#messages').children('div').length;
         if (num % 2 == 0) {
-            return "<div class='panel-body'>" + renderFrom(data.from) + "对" + renderTo(data.to) + replace_em(data.msg) + "</div>";
+            return "<div class='panel-body'>" + renderFrom(data.from) + "对" + renderTo(data.to) + replace_em(data.msg) + "<span class='time'>"+getTime()+"</span></div>";
         } else {
-            return "<div class='panel-footer'>" + renderFrom(data.from) + "对" + renderTo(data.to) + replace_em(data.msg) + "</div>";
+            return "<div class='panel-footer'>" + renderFrom(data.from) + "对" + renderTo(data.to) + replace_em(data.msg) + "<span class='time'>"+getTime()+"</span></div>";
         }
     }
 
@@ -19,7 +19,7 @@ $(document).ready(function() {
     }
 
     function renderTo(to) {
-        return "<span class='to'>" + "&nbsp;&nbsp;" + to + "&nbsp;&nbsp;</span>说:"
+        return "<span class='to'>" + "&nbsp;&nbsp;" + to + "&nbsp;&nbsp;</span>说:&nbsp;&nbsp;&nbsp;&nbsp;"
     }
 
     function login() {
@@ -68,10 +68,6 @@ $(document).ready(function() {
         assign: 'msg', //给输入框赋值
         path: '/images/face/' //表情图片存放的路径
     });
-    // $(".sub_btn").click(function() {
-    //     var str = $("#saytext").val();
-    //     $("#messages").append(replace_em(str));
-    // });
 
     function replace_em(str) {
         str = str.replace(/\</g, '&lt;');
@@ -80,6 +76,19 @@ $(document).ready(function() {
         str = str.replace(/\[em_([0-9]*)\]/g, '<img src="images/face/$1.gif" border="0" />');
         return str;
     }
+    //定位到最新的消息
+    function gotoNewMsg(){
+        var num = $('#messages').children('div').length;
+        if(num<11){
+            return;
+        }
+        $('#messages').scrollTop(450);
+    }
+    function getTime() {
+       var date = new Date();
+       var time = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? ('0' + date.getMinutes()) : date.getMinutes()) + ":" + (date.getSeconds() < 10 ? ('0' + date.getSeconds()) : date.getSeconds());
+       return time;
+   }
 
     $('form').submit(function() {
         var toDiv = ($('#userlist').find('div.active')[0]);
@@ -110,10 +119,12 @@ $(document).ready(function() {
     socket.on('chat message', function(data) {
         var msgdiv = renderColor(data);
         $('#messages').append(msgdiv);
+        gotoNewMsg();
     });
     socket.on('chat secret', function(data) {
         var msgdiv = renderColor(data);
         $('#messages').append(msgdiv);
+        gotoNewMsg();
     });
     socket.on('disconnect', function() {
 

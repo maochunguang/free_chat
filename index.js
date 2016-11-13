@@ -40,6 +40,7 @@ io.on('connection', function(socket) {
     socket.on('online', function(data) {
         socket.name = data.user;
         if (!users[data.user]) {
+            console.log(socket.name+'已经存在');
             users[data.user] = socket;
         }
         var usernames = {};

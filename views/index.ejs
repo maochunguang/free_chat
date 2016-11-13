@@ -24,15 +24,16 @@
             </div>
             <div>
                 <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group" >
+                    <div class="form-group">
                         <input id="msg" type="text" class="form-control" style="width:400px" placeholder="say what">
                     </div>
-                    <button type="button" id="emotion" class="btn btn-error">表情</button>
+                    <div id="emotion" class="form-group"><img src="images/imag.jpg" height="35" width="35" alt="表情"></div>
                     <button type="submit" class="btn btn-success">发送</button>
                 </form>
-                <button type="button" class="btn btn-default navbar-btn">
-            新建组
-        </button>
+                <!-- <button type="button" class="btn btn-default navbar-btn">新建组</button> -->
+                <div class="navbar-brand navbar-right">
+                    您好: <span id="usernick">aaaa</span>
+                </div>
             </div>
         </div>
     </nav>
