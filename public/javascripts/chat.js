@@ -44,6 +44,7 @@ $(document).ready(function() {
     }
 
     function flushUsers(users) {
+        $("#usernick").html(userName);
         $("#userlist").empty().append("<div class='list-group-item active' data-user='all'>所有人</div>");
         for (var i in users) {
             $("#userlist").append("<div class='list-group-item' data-user='" + users[i] + "'>" + users[i] + "</div>");
