@@ -8,6 +8,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var users = {};
+var usernames={};
 // view engine setup
 app.use(logger('dev'));
 app.set('views', path.join(__dirname, 'views'));
@@ -38,15 +39,18 @@ io.on('connection', function(socket) {
     console.log('a user connected');
 
     socket.on('online', function(data) {
+        console.log(data);
         socket.name = data.user;
         if (!users[data.user]) {
             console.log(socket.name+'已经存在');
             users[data.user] = socket;
         }
-        var usernames = {};
         for(var i in users){
-            usernames[i]=users[i].name;
+            if(users[i].name){
+                usernames[i]=users[i].name;
+            }
         }
+        console.log(usernames);
         //向所有用户广播该用户上线信息
         io.emit('online', {
             user: data.user,
@@ -65,7 +69,14 @@ io.on('connection', function(socket) {
         }
     });
     socket.on('disconnect', function() {
-        console.log('user disconnected');
+        console.log('%s user disconnected',socket.name);
+        for(var i in users){
+            if(users[i].name==socket.name){
+                delete users[i];
+                delete usernames[socket.name];
+            }
+        }
+        io.emit('disconnect',{users: usernames})
     });
 });
 

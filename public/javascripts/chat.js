@@ -127,7 +127,8 @@ $(document).ready(function() {
         $('#messages').append(msgdiv);
         gotoNewMsg();
     });
-    socket.on('disconnect', function() {
-
+    socket.emit('disconnect',{user: userName});
+    socket.on('disconnect', function(data) {
+        flushUsers(data.users);
     });
 });
