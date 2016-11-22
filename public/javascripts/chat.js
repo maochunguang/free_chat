@@ -86,7 +86,16 @@ $(document).ready(function() {
         if(num<11){
             return;
         }
-        $('#messages').scrollTop(450);
+        var hight = getScrollHight(num);
+        $('#messages').scrollTop(hight);
+    }
+    function getScrollHight(num){
+        var hight = 450; 
+        if(num%2==0){
+            return hight+(num-10)*45;
+        }else{
+            return hight+(num-10-1)*45+40;
+        }
     }
     function getTime() {
        var date = new Date();
