@@ -36,6 +36,9 @@ $(document).ready(function() {
             })
             .done(function(msg) {
                 localStorage.setItem('name', name);
+                $("#usernick").html(name);
+                //刷新页面解决用户刷新问题
+                window.location.reload(); 
             })
             .fail(function() {
                 alert("登录失败!");
